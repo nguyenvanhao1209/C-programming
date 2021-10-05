@@ -4,7 +4,7 @@ void CharReadWrite(FILE *fin, FILE *fout){
 	int c;
 	while ((c=fgetc(fin)) != EOF){
 		fputc(c, fout);
-		fputc(c, fout);
+		putchar(c);
 	}
 }
 int main(int argc, char *argv[]){
