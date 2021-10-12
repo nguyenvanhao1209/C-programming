@@ -7,11 +7,16 @@ struct Address_List{
 	struct Address_List *next;
 };
 typedef struct Address_List AddressLis;
-AddressLis *Insert(AddressLis *cur, address x){
+AddressLis *createAdd(address x){
 	AddressLis *temp;
 	temp = (AddressLis *)malloc(sizeof(AddressLis));
+	temp->next = NULL;
 	strcpy(temp->addr,x);
-	temp->next = cur->next;
+	return temp;
+}
+AddressLis *Insert(AddressLis *cur, address x){
+	AddressLis *temp = createAdd(x);
+	strcpy(temp->addr,x);
 	cur->next = temp;
 	return temp;
 }
@@ -31,4 +36,19 @@ char *Delete_add(AddressLis *cur){
 	strcpy(x,temp->addr);
 	free(temp);
 	return x;
+}
+int main(){
+	int n;
+	address x;
+	scanf("%d",&n);
+	gets(x);
+	AddressLis *root = createAdd(x);
+	AddressLis *p = root;
+	int i;
+	for(i=1;i<n;i++){
+		gets(x);
+		p = Insert(p,x);
+	}
+	printlist(root);
+	return 0;
 }
