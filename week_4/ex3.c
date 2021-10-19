@@ -15,7 +15,7 @@ char STACKpop(){
 	return s[--N];
 }
 int main(){
-	char a[] = "3+5*4";
+	char a[] = "3 + 5 * 4";
 	int i;
 	N = strlen(a);
 	STACKinit(N);
