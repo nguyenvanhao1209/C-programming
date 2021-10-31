@@ -3,7 +3,7 @@
 #include<stdlib.h>
 typedef struct Address{
 	char name[20];
-	char tele[10];
+	char telephone[20];
 	char email[20];
 }Addr;
 struct StackNode{
@@ -50,28 +50,25 @@ Addr StackPop(Stack *s){
 }
 int main(){
 	FILE *f,*f1;
-	f = fopen("new.txt","r");
+	f = fopen("C:/Users/Administrator/Desktop/new.txt","r");
 	Stack *ST;
 	ST = StackConstruct();
 	Addr value; 
 	while(!feof(f)){
-		fgets(value.name,255,f);
-		value.name[strlen(value.name)-1] = '\0';
-		printf("%s\n",value.name);
-		fgets(value.tele,255,f);
-		value.tele[strlen(value.tele)-1] = '\0';
-		printf("%s\n",value.tele);
-		fgets(value.email,255,f);
-		value.email[strlen(value.email)-1] = '\0';
+		fscanf(f,"%s\t",value.name);
+		printf("%s\t",value.name);
+		fscanf(f,"%s\t",value.telephone);
+		printf("%s\t",value.telephone);
+		fscanf(f,"%s\n",value.email);
 		printf("%s\n",value.email);
 		StackPush(ST,value);
 	}
 	fclose(f);
-	f1 = fopen("test.txt","w");
+	f1 = fopen("C:/Users/Administrator/Desktop/test.txt","w");
 	while(!StackEmpty(ST)){
 		value = StackPop(ST);
-		fprintf(f1,"%s\n",value.name);
-		fprintf(f1,"%s\n",value.tele);
+		fprintf(f1,"%s\t",value.name);
+		fprintf(f1,"%s\t",value.telephone);
 		fprintf(f1,"%s\n",value.email);
 	}
 	fclose(f1);
