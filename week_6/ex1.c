@@ -44,8 +44,11 @@ void timtheoten(){
 	for(i=0;i<n;i++){
 		if(strcmp(M[i].name,s)==0){
 			fprintf(f1,"%s\t",M[i].name);
+			printf("%s\t",M[i].name);
 			fprintf(f1,"%s\t",M[i].telephone);
+			printf("%s\t",M[i].telephone);
 			fprintf(f1,"%s\n",M[i].email);
+			printf("%s\n",M[i].email);
 		}
 	}
 	fclose(f1);
@@ -87,8 +90,11 @@ void timtheosdt(){
 	for(i=0;i<n;i++){
 		if(strcmp(M[i].telephone,s)==0){
 			fprintf(f1,"%s\t",M[i].name);
+			printf("%s\t",M[i].name);
 			fprintf(f1,"%s\t",M[i].telephone);
+			printf("%s\t",M[i].telephone);
 			fprintf(f1,"%s\n",M[i].email);
+			printf("%s\n",M[i].email);
 		}
 	}
 	fclose(f1);
@@ -130,8 +136,11 @@ void timtheoemail(){
 	for(i=0;i<n;i++){
 		if(strcmp(M[i].email,s)==0){
 			fprintf(f1,"%s\t",M[i].name);
+			printf("%s\t",M[i].name);
 			fprintf(f1,"%s\t",M[i].telephone);
+			printf("%s\t",M[i].telephone);
 			fprintf(f1,"%s\n",M[i].email);
+			printf("%s\n",M[i].email);
 		}
 	}
 	fclose(f1);
