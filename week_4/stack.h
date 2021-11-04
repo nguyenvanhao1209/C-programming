@@ -16,32 +16,29 @@ Stack *StackConstruct(){
 	s->top = NULL;
 	return s;
 }
-void StackDestroy(Stack *s){
-	while(!StackEmpty(s)){
-		StackPop(s);
-	}
-	free(s);
-}
+
 int StackEmpty(Stack *s){
 	return (s->top == NULL);
 }
-int StackPush(Stack *s,int item){
+void StackPush(Stack *s,int item){
 	StackNode *node;
 	node = (StackNode *)malloc(sizeof(StackNode));
 	node->item = item;
 	node->next = s->top;
 	s->top = node;
-	return 0;
 }
-int StackPop(Stack *s){
-	int item;
+void StackPop(Stack *s){
 	StackNode *node;
 	if(StackEmpty(s)){
-		return NULL;
+		return;
 	}
 	node = s->top;
-	item = node->item;
 	s->top = node->next;
 	free(node);
-	return item;
+}
+void StackDestroy(Stack *s){
+	while(!StackEmpty(s)){
+		StackPop(s);
+	}
+	free(s);
 }
