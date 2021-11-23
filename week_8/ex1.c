@@ -25,7 +25,7 @@ int Isleaf(node *p){
 }
 int countNode(node *t){
 	if(EmptyTree(t)) return 0;
-	else return 1 + countNode(LeftChild(t)+RightChild(t));
+	else return 1 + countNode(LeftChild(t))+countNode(RightChild(t));
 }
 node *insertNode(node *t, int x){
 	if(t == NULL){
