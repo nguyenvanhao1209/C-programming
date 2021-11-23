@@ -6,10 +6,11 @@ typedef struct phoneaddress_t {
   char email[25];
 }phoneaddress;
 typedef struct Node{
-  phoneaddress key;
-  struct Node* Left,Right;
+  phoneaddress Key;
+  struct Node* left;
+  struct Node* right;
 }NodeType;
-typedef Node* TreeType;
+typedef struct Node* TreeType;
 TreeType Search(char* email,TreeType Root){
   if (Root == NULL) return NULL;
   if (strcmp((Root->Key).email, email) == 0) return Root;
@@ -34,7 +35,7 @@ void InsertNode(phoneaddress x,TreeType *Root ){
 void printTree(TreeType Root){
   if(Root != NULL){
     printTree(Root->left);
-    printf("%-20s\t%-20s\t%-20s\n",Root->key.email,Root->key.name,Root->key.tel);
+    printf("%-20s\t%-20s\t%-20s\n",Root->Key.email,Root->Key.name,Root->Key.tel);
     printTree(Root->right);
   }
 }
@@ -50,11 +51,11 @@ int main(){
   irc = fread(phonearr, sizeof(phoneaddress), n, fp);
   fclose(fp);
   for (i=0; i<n; i++)
-    root = InsertNode(phonearr[i],root);
+     InsertNode(phonearr[i],root);
   printTree(root);
   char s[25];
   fflush(stdin);
   gets(s);
   TreeType p = Search(s,root);
-  printf("%-20s\t%-20s\t%-20s\n",p->key.email,p->key.name,p->key.tel);
+  printf("%-20s\t%-20s\t%-20s\n",p->Key.email,p->Key.name,p->Key.tel);
 }
