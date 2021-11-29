@@ -29,8 +29,8 @@ void InsertNode(phoneaddress x,TreeType *Root ){
   }
   else if (strcmp(((*Root)->Key).email, x.email) > 0)
     InsertNode(x, (*Root)->left);
-  else if (strcmp(((*Root)->Key).email, x.email) > 0) 
-    InsertNode(x,(*Root)->right); 
+  else if (strcmp(((*Root)->Key).email, x.email) > 0)
+    InsertNode(x,(*Root)->right);
 }
 void printTree(TreeType Root){
   if(Root != NULL){
