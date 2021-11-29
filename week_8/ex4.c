@@ -43,12 +43,16 @@ int main(){
   FILE *fp;
   phoneaddress phonearr[MAX];
   TreeType root;
-  int i,n, irc;
+  int i,n;
   int n=10;
-  if((fp = fopen("phonebook.dat","rb")) == NULL){
-    printf("Can not open %s.\n", "phonebook.dat");
+  if((fp = fopen("phonebook.txt","r")) == NULL){
+    printf("Can not open %s.\n", "phonebook.txt");
   }
-  irc = fread(phonearr, sizeof(phoneaddress), n, fp);
+  for(i=0;i<n;i++){
+    fscanf(fp,"%s\t",phonearr[i].name);
+    fscanf(fp,"%s\t",phonearr[i].email);
+    fscanf(fp,"%s\n",phonearr[i].tel);
+  }
   fclose(fp);
   for (i=0; i<n; i++)
      InsertNode(phonearr[i],root);
@@ -59,4 +63,3 @@ int main(){
   TreeType p = Search(s,root);
   printf("%-20s\t%-20s\t%-20s\n",p->Key.email,p->Key.name,p->Key.tel);
 }
-//them comment cho vui
