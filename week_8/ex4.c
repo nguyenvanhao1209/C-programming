@@ -43,6 +43,7 @@ void printTree(node *t){
   }
 }
 int main(){
+<<<<<<< HEAD
   FILE *f;
   f = fopen("week_8/phonebook.txt","r");
   node *t = NULL;
@@ -56,6 +57,26 @@ int main(){
   fclose(f);
   phoneaddress tim;
   printf("nhap email can tim: ");
+=======
+  FILE *fp;
+  phoneaddress phonearr[MAX];
+  TreeType root;
+  int i,n;
+  int n=10;
+  if((fp = fopen("phonebook.txt","r")) == NULL){
+    printf("Can not open %s.\n", "phonebook.txt");
+  }
+  for(i=0;i<n;i++){
+    fscanf(fp,"%s\t",phonearr[i].name);
+    fscanf(fp,"%s\t",phonearr[i].email);
+    fscanf(fp,"%s\n",phonearr[i].tel);
+  }
+  fclose(fp);
+  for (i=0; i<n; i++)
+     InsertNode(phonearr[i],root);
+  printTree(root);
+  char s[25];
+>>>>>>> d8818a31d8d1acc7e279ed1938cd9c0ac3f5d843
   fflush(stdin);
   gets(tim.email);
   node *p = searchNode(t,tim);
