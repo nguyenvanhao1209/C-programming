@@ -1,61 +1,65 @@
 #include <stdio.h>
-#define MAX 20
-typedef struct phoneaddress_t {
+#include<stdlib.h>
+#include<string.h>
+struct phoneaddress{
   char name[20];
   char tel[11];
   char email[25];
-}phoneaddress;
-typedef struct Node{
-  phoneaddress Key;
-  struct Node* left;
-  struct Node* right;
-}NodeType;
-typedef struct Node* TreeType;
-TreeType Search(char* email,TreeType Root){
-  if (Root == NULL) return NULL;
-  if (strcmp((Root->Key).email, email) == 0) return Root;
-  else if (strcmp((Root->Key).email, email) < 0)
-    return Search(email,Root->right);
-  else {
-    return Search(email,Root->left);
-  }
+};
+typedef struct phoneaddress phoneaddress;
+struct node{
+  phoneaddress data;
+  struct node *left;
+  struct node *right;
+};
+typedef struct node node;
+node *insertNode(node *t, phoneaddress x){
+	if(t == NULL){
+		node *temp = (node*)malloc(sizeof(node));
+		temp->data = x;
+		temp->left = NULL;
+		temp->right = NULL;
+		return temp;
+	}else{
+		if(strcmp(x.email,t->data.email)<0){
+			t->left = insertNode(t->left,x);
+		}
+		else{
+			t->right = insertNode(t->right, x);
+		}
+	}
 }
-void InsertNode(phoneaddress x,TreeType *Root ){
-  if (*Root == NULL){
-    *Root=(NodeType*)malloc(sizeof(NodeType));
-    (*Root)->Key = x;
-    (*Root)->left = NULL;
-    (*Root)->right = NULL;
-  }
-  else if (strcmp(((*Root)->Key).email, x.email) > 0)
-    InsertNode(x, (*Root)->left);
-  else if (strcmp(((*Root)->Key).email, x.email) > 0) 
-    InsertNode(x,(*Root)->right); 
+node *searchNode(node *t,phoneaddress x){
+  if(t == NULL) return NULL;
+  else if(strcmp(x.email,t->data.email)==0) return t;
+  else if(strcmp(x.email,t->data.email)<0) return searchNode(t->left,x);
+  else return searchNode(t->right,x);
 }
-void printTree(TreeType Root){
-  if(Root != NULL){
-    printTree(Root->left);
-    printf("%-20s\t%-20s\t%-20s\n",Root->Key.email,Root->Key.name,Root->Key.tel);
-    printTree(Root->right);
+void printTree(node *t){
+  if(t != NULL){
+    printTree(t->left);
+    printf("%-20s%-20s%-20s\n",t->data.name,t->data.email,t->data.tel);
+    printTree(t->right);
   }
 }
 int main(){
-  FILE *fp;
-  phoneaddress phonearr[MAX];
-  TreeType root;
-  int i,n, irc;
-  int n=10;
-  if((fp = fopen("phonebook.dat","rb")) == NULL){
-    printf("Can not open %s.\n", "phonebook.dat");
+  FILE *f;
+  f = fopen("week_8/phonebook.txt","r");
+  node *t = NULL;
+  phoneaddress x;
+  while(!feof(f)){
+    fscanf(f,"%s\t",x.name);
+    fscanf(f,"%s\t",x.email);
+    fscanf(f,"%s\n",x.tel);
+    t = insertNode(t,x);
   }
-  irc = fread(phonearr, sizeof(phoneaddress), n, fp);
-  fclose(fp);
-  for (i=0; i<n; i++)
-     InsertNode(phonearr[i],root);
-  printTree(root);
-  char s[25];
+  fclose(f);
+  phoneaddress tim;
+  printf("nhap email can tim: ");
   fflush(stdin);
-  gets(s);
-  TreeType p = Search(s,root);
-  printf("%-20s\t%-20s\t%-20s\n",p->Key.email,p->Key.name,p->Key.tel);
+  gets(tim.email);
+  node *p = searchNode(t,tim);
+  if(p != NULL) printf("%-20s%-20s%-20s\n",p->data.name,p->data.email,p->data.tel);
+  else printf("khong tim thay\n");
 }
+
