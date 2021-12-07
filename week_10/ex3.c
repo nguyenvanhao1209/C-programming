@@ -1,11 +1,5 @@
 #include<stdio.h>
 #include<string.h>
-struct address{
-	char name[31];
-	char email[31];
-	char tel[31];
-};
-typedef struct address address;
 int demchen = 0;
 int demdong = 0;
 void insertionSort(int A[],int n){
